@@ -2,18 +2,19 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
   <meta name="description" content="FloraVault - Privacy-first botanical portal for nursery plant uploads, community Q&A, care guides, health cons & toxicity alerts, with real-time AI assistance." />
   
   <!-- Strict Privacy: Zero Third-Party Trackers, No Referrer Leakage -->
   <meta name="referrer" content="no-referrer" />
   <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <meta name="theme-color" content="#059669" />
 
   <title>FloraVault • Privacy-First Botanical Portal & Nursery Registry</title>
 
   <style>
 /* ==========================================================================
-   FloraVault - Ultra-Clean, Privacy-First Botanical Web Application
+   FloraVault - Mobile-Optimized, Privacy-First Botanical Web Application
    Zero Third-Party Trackers • Self-Contained Native Web CSS
    ========================================================================== */
 
@@ -62,6 +63,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  -webkit-tap-highlight-color: transparent;
 }
 
 body {
@@ -72,6 +74,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
   flex-direction: column;
 }
@@ -118,6 +121,7 @@ body {
   justify-content: center;
   color: white;
   box-shadow: 0 2px 8px rgba(16, 185, 129, 0.35);
+  flex-shrink: 0;
 }
 
 .nav-links {
@@ -130,10 +134,10 @@ body {
 .nav-btn {
   background: transparent;
   border: none;
-  font-size: 0.95rem;
+  font-size: 0.92rem;
   font-weight: 600;
   color: var(--text-muted);
-  padding: 0.55rem 0.9rem;
+  padding: 0.5rem 0.85rem;
   border-radius: var(--radius-sm);
   cursor: pointer;
   display: flex;
@@ -172,6 +176,7 @@ body {
   border-radius: var(--radius-full);
   cursor: pointer;
   transition: var(--transition);
+  white-space: nowrap;
 }
 
 .privacy-badge:hover {
@@ -187,11 +192,61 @@ body {
   box-shadow: 0 0 6px #22c55e;
 }
 
+/* Mobile Bottom Navigation Bar */
+.mobile-bottom-nav {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 62px;
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(16px);
+  border-top: 1px solid var(--border-color);
+  z-index: 100;
+  padding: 0.25rem 0.5rem max(0.4rem, env(safe-area-inset-bottom));
+  align-items: center;
+  justify-content: space-around;
+  box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.06);
+}
+
+.mobile-nav-btn {
+  background: transparent;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.15rem;
+  color: var(--text-muted);
+  font-size: 0.72rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--radius-sm);
+  transition: var(--transition);
+  min-width: 52px;
+}
+
+.mobile-nav-btn.active {
+  color: var(--primary);
+}
+
+.mobile-nav-btn.active .mobile-nav-icon {
+  transform: scale(1.15);
+}
+
+.mobile-nav-icon {
+  font-size: 1.25rem;
+  line-height: 1;
+  transition: transform 0.15s ease;
+}
+
 /* Hero Section */
 .hero {
   background: linear-gradient(180deg, #ffffff 0%, #f0fdf4 100%);
   border-bottom: 1px solid var(--border-color);
-  padding: 2.5rem 1.5rem 2rem;
+  padding: 2.25rem 1.5rem 1.75rem;
   text-align: center;
 }
 
@@ -216,10 +271,10 @@ body {
 }
 
 .hero-subtitle {
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   color: var(--text-muted);
   max-width: 660px;
-  margin: 0 auto 1.75rem;
+  margin: 0 auto 1.5rem;
 }
 
 .hero-cta-group {
@@ -245,6 +300,7 @@ body {
   transition: var(--transition);
   text-decoration: none;
   line-height: 1.4;
+  touch-action: manipulation;
 }
 
 .btn-primary {
@@ -288,14 +344,14 @@ body {
 .main-wrapper {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem 1.5rem;
+  padding: 1.75rem 1.25rem;
   width: 100%;
   flex: 1;
 }
 
 .view-section {
   display: none;
-  animation: fadeIn 0.25s ease-out forwards;
+  animation: fadeIn 0.2s ease-out forwards;
 }
 
 .view-section.active {
@@ -303,7 +359,7 @@ body {
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(6px); }
+  from { opacity: 0; transform: translateY(4px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
@@ -312,25 +368,25 @@ body {
   background: white;
   border: 1px solid var(--border-color);
   border-radius: var(--radius-md);
-  padding: 1rem 1.25rem;
-  margin-bottom: 1.75rem;
+  padding: 0.85rem 1rem;
+  margin-bottom: 1.5rem;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: 1rem;
+  gap: 0.75rem;
   box-shadow: var(--shadow-sm);
 }
 
 .search-input-box {
   position: relative;
   flex: 1;
-  min-width: 260px;
+  min-width: 240px;
 }
 
 .search-icon {
   position: absolute;
-  left: 0.9rem;
+  left: 0.85rem;
   top: 50%;
   transform: translateY(-50%);
   color: var(--text-light);
@@ -338,10 +394,10 @@ body {
 
 .search-input {
   width: 100%;
-  padding: 0.65rem 0.9rem 0.65rem 2.5rem;
+  padding: 0.65rem 0.85rem 0.65rem 2.4rem;
   border: 1px solid var(--border-color);
   border-radius: var(--radius-sm);
-  font-size: 0.95rem;
+  font-size: 0.92rem;
   outline: none;
   transition: var(--transition);
 }
@@ -355,7 +411,7 @@ body {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: 0.5rem;
+  gap: 0.45rem;
 }
 
 .filter-pill {
@@ -364,10 +420,11 @@ body {
   color: var(--text-muted);
   font-size: 0.82rem;
   font-weight: 600;
-  padding: 0.4rem 0.85rem;
+  padding: 0.35rem 0.75rem;
   border-radius: var(--radius-full);
   cursor: pointer;
   transition: var(--transition);
+  white-space: nowrap;
 }
 
 .filter-pill:hover {
@@ -390,8 +447,8 @@ body {
 /* Plant Card Grid */
 .plant-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.25rem;
 }
 
 .plant-card {
@@ -408,7 +465,7 @@ body {
 }
 
 .plant-card:hover {
-  transform: translateY(-4px);
+  transform: translateY(-3px);
   box-shadow: var(--shadow-lg);
   border-color: #cbd5e1;
 }
@@ -416,7 +473,7 @@ body {
 .card-media-wrapper {
   position: relative;
   width: 100%;
-  height: 210px;
+  height: 200px;
   background: #e2e8f0;
   overflow: hidden;
 }
@@ -434,14 +491,14 @@ body {
 
 .card-category-badge {
   position: absolute;
-  top: 0.75rem;
-  left: 0.75rem;
+  top: 0.65rem;
+  left: 0.65rem;
   background: rgba(15, 23, 42, 0.78);
   backdrop-filter: blur(6px);
   color: white;
   font-size: 0.72rem;
   font-weight: 700;
-  padding: 0.25rem 0.65rem;
+  padding: 0.2rem 0.6rem;
   border-radius: var(--radius-full);
   text-transform: uppercase;
   letter-spacing: 0.04em;
@@ -449,27 +506,27 @@ body {
 
 .card-price-badge {
   position: absolute;
-  bottom: 0.75rem;
-  right: 0.75rem;
+  bottom: 0.65rem;
+  right: 0.65rem;
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(6px);
   color: var(--primary-hover);
   font-size: 0.88rem;
   font-weight: 800;
-  padding: 0.25rem 0.65rem;
+  padding: 0.2rem 0.6rem;
   border-radius: var(--radius-sm);
   box-shadow: var(--shadow-sm);
 }
 
 .card-body {
-  padding: 1.25rem;
+  padding: 1.15rem;
   display: flex;
   flex-direction: column;
   flex: 1;
 }
 
 .card-title {
-  font-size: 1.2rem;
+  font-size: 1.15rem;
   font-weight: 700;
   color: var(--text-main);
   line-height: 1.3;
@@ -477,21 +534,21 @@ body {
 }
 
 .card-scientific {
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   color: var(--text-muted);
   font-style: italic;
-  margin-bottom: 0.85rem;
+  margin-bottom: 0.75rem;
 }
 
 .card-toxicity-banner {
   display: flex;
   align-items: center;
   gap: 0.45rem;
-  padding: 0.5rem 0.75rem;
+  padding: 0.45rem 0.7rem;
   border-radius: var(--radius-sm);
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   font-weight: 700;
-  margin-bottom: 0.9rem;
+  margin-bottom: 0.85rem;
   line-height: 1.3;
 }
 
@@ -511,9 +568,9 @@ body {
   display: flex;
   align-items: center;
   gap: 0.4rem;
-  font-size: 0.82rem;
+  font-size: 0.8rem;
   color: var(--text-muted);
-  margin-bottom: 0.85rem;
+  margin-bottom: 0.75rem;
 }
 
 .card-specs {
@@ -521,9 +578,9 @@ body {
   grid-template-columns: 1fr 1fr;
   gap: 0.5rem;
   background: var(--bg-subtle);
-  padding: 0.65rem 0.85rem;
+  padding: 0.55rem 0.75rem;
   border-radius: var(--radius-sm);
-  font-size: 0.78rem;
+  font-size: 0.76rem;
   color: var(--text-muted);
   margin-top: auto;
 }
@@ -546,7 +603,7 @@ body {
 }
 
 .scanner-header {
-  padding: 1.25rem 1.75rem;
+  padding: 1rem 1.5rem;
   border-bottom: 1px solid var(--border-color);
   display: flex;
   align-items: center;
@@ -554,14 +611,14 @@ body {
 }
 
 .scanner-title {
-  font-size: 1.25rem;
+  font-size: 1.15rem;
   font-weight: 800;
 }
 
 .scanner-viewport-box {
   position: relative;
   background: #0f172a;
-  min-height: 420px;
+  min-height: 380px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -570,7 +627,7 @@ body {
 
 .scanner-video {
   width: 100%;
-  max-height: 520px;
+  max-height: 480px;
   object-fit: cover;
 }
 
@@ -579,8 +636,8 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 250px;
-  height: 250px;
+  width: 220px;
+  height: 220px;
   border: 2px dashed rgba(255, 255, 255, 0.7);
   border-radius: var(--radius-lg);
   pointer-events: none;
@@ -600,7 +657,7 @@ body {
 .scanner-corner.br { bottom: -2px; right: -2px; border-width: 0 4px 4px 0; }
 
 .scanner-controls {
-  padding: 1.25rem 1.75rem;
+  padding: 1rem 1.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -610,8 +667,8 @@ body {
 }
 
 .shutter-btn {
-  width: 64px;
-  height: 64px;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
   background: white;
   border: 4px solid var(--primary);
@@ -629,25 +686,25 @@ body {
 }
 
 .shutter-inner {
-  width: 46px;
-  height: 46px;
+  width: 44px;
+  height: 44px;
   background: var(--primary);
   border-radius: 50%;
 }
 
 .scanner-preview-card {
-  margin-top: 1.5rem;
+  margin-top: 1.25rem;
   background: white;
   border: 1px solid var(--border-color);
   border-radius: var(--radius-md);
-  padding: 1.5rem;
+  padding: 1.25rem;
   display: flex;
-  gap: 1.5rem;
+  gap: 1.25rem;
 }
 
 .scanner-thumb {
-  width: 140px;
-  height: 140px;
+  width: 130px;
+  height: 130px;
   object-fit: cover;
   border-radius: var(--radius-sm);
   border: 1px solid var(--border-color);
@@ -660,18 +717,18 @@ body {
   background: white;
   border: 1px solid var(--border-color);
   border-radius: var(--radius-lg);
-  padding: 2.25rem;
+  padding: 1.75rem;
   box-shadow: var(--shadow-sm);
 }
 
 .form-header {
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
   border-bottom: 1px solid var(--border-color);
-  padding-bottom: 1.25rem;
+  padding-bottom: 1rem;
 }
 
 .form-title {
-  font-size: 1.65rem;
+  font-size: 1.5rem;
   font-weight: 800;
   color: var(--text-main);
   letter-spacing: -0.02em;
@@ -679,20 +736,20 @@ body {
 
 .form-subtitle {
   color: var(--text-muted);
-  font-size: 0.95rem;
+  font-size: 0.9rem;
 }
 
 .form-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 1.25rem;
-  margin-bottom: 1.5rem;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
 }
 
 .form-group {
   display: flex;
   flex-direction: column;
-  gap: 0.4rem;
+  gap: 0.35rem;
 }
 
 .form-group.full-width {
@@ -700,17 +757,17 @@ body {
 }
 
 .form-label {
-  font-size: 0.88rem;
+  font-size: 0.85rem;
   font-weight: 700;
   color: var(--text-main);
 }
 
 .form-input, .form-select, .form-textarea {
   width: 100%;
-  padding: 0.7rem 0.9rem;
+  padding: 0.65rem 0.85rem;
   border: 1px solid var(--border-color);
   border-radius: var(--radius-sm);
-  font-size: 0.95rem;
+  font-size: 0.92rem;
   background: white;
   outline: none;
   font-family: inherit;
@@ -723,7 +780,7 @@ body {
 }
 
 .form-textarea {
-  min-height: 90px;
+  min-height: 85px;
   resize: vertical;
 }
 
@@ -731,22 +788,22 @@ body {
   background: #fff1f2;
   border: 1px solid #fecdd3;
   border-radius: var(--radius-md);
-  padding: 1.25rem;
-  margin-bottom: 1.5rem;
+  padding: 1.15rem;
+  margin-bottom: 1.25rem;
 }
 
 .hazard-toggle-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 1rem;
+  margin-bottom: 0.85rem;
 }
 
 .hazard-fields {
   display: none;
   flex-direction: column;
-  gap: 1rem;
-  animation: fadeIn 0.25s ease;
+  gap: 0.85rem;
+  animation: fadeIn 0.2s ease;
 }
 
 .hazard-fields.show {
@@ -763,15 +820,15 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 1.75rem;
+  margin-bottom: 1.5rem;
 }
 
 .question-card {
   background: white;
   border: 1px solid var(--border-color);
   border-radius: var(--radius-md);
-  padding: 1.5rem;
-  margin-bottom: 1.25rem;
+  padding: 1.25rem;
+  margin-bottom: 1rem;
   box-shadow: var(--shadow-sm);
   transition: var(--transition);
 }
@@ -785,20 +842,20 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.65rem;
 }
 
 .question-author {
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   color: var(--text-muted);
   font-weight: 500;
 }
 
 .question-title {
-  font-size: 1.25rem;
+  font-size: 1.15rem;
   font-weight: 700;
   color: var(--text-main);
-  margin-bottom: 0.6rem;
+  margin-bottom: 0.5rem;
   cursor: pointer;
 }
 
@@ -808,25 +865,25 @@ body {
 
 .question-excerpt {
   color: var(--text-muted);
-  font-size: 0.95rem;
-  margin-bottom: 1rem;
-  line-height: 1.55;
+  font-size: 0.9rem;
+  margin-bottom: 0.85rem;
+  line-height: 1.5;
 }
 
 .answers-thread {
-  margin-top: 1.25rem;
-  padding-top: 1.25rem;
+  margin-top: 1rem;
+  padding-top: 1rem;
   border-top: 1px solid var(--border-color);
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 0.85rem;
 }
 
 .answer-bubble {
   background: var(--bg-subtle);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-md);
-  padding: 1rem 1.25rem;
+  padding: 0.85rem 1.15rem;
 }
 
 .answer-bubble.ai-answer {
@@ -837,9 +894,9 @@ body {
 .answer-meta {
   display: flex;
   align-items: center;
-  gap: 0.6rem;
-  margin-bottom: 0.5rem;
-  font-size: 0.82rem;
+  gap: 0.5rem;
+  margin-bottom: 0.4rem;
+  font-size: 0.8rem;
   font-weight: 700;
 }
 
@@ -848,7 +905,7 @@ body {
   color: white;
   padding: 0.15rem 0.5rem;
   border-radius: var(--radius-full);
-  font-size: 0.72rem;
+  font-size: 0.7rem;
 }
 
 .nursery-pill {
@@ -856,14 +913,14 @@ body {
   color: white;
   padding: 0.15rem 0.5rem;
   border-radius: var(--radius-full);
-  font-size: 0.72rem;
+  font-size: 0.7rem;
 }
 
 /* Blog */
 .blog-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-  gap: 1.75rem;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.5rem;
 }
 
 .blog-card {
@@ -879,42 +936,42 @@ body {
 }
 
 .blog-card:hover {
-  transform: translateY(-4px);
+  transform: translateY(-3px);
   box-shadow: var(--shadow-lg);
 }
 
 .blog-img {
   width: 100%;
-  height: 200px;
+  height: 190px;
   object-fit: cover;
 }
 
 .blog-content {
-  padding: 1.5rem;
+  padding: 1.25rem;
   display: flex;
   flex-direction: column;
   flex: 1;
 }
 
 .blog-tag {
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   font-weight: 700;
   text-transform: uppercase;
   color: var(--primary);
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.4rem;
 }
 
 .blog-title {
-  font-size: 1.25rem;
+  font-size: 1.15rem;
   font-weight: 800;
   line-height: 1.35;
-  margin-bottom: 0.65rem;
+  margin-bottom: 0.55rem;
 }
 
 .blog-summary {
   color: var(--text-muted);
-  font-size: 0.9rem;
-  margin-bottom: 1.25rem;
+  font-size: 0.88rem;
+  margin-bottom: 1rem;
   flex: 1;
 }
 
@@ -923,9 +980,9 @@ body {
   position: fixed;
   bottom: 20px;
   right: 20px;
-  width: 400px;
+  width: 390px;
   max-width: calc(100vw - 30px);
-  height: 580px;
+  height: 560px;
   background: white;
   border: 1px solid var(--border-color);
   border-radius: var(--radius-lg);
@@ -949,7 +1006,7 @@ body {
 .chat-header {
   background: linear-gradient(135deg, #059669, #047857);
   color: white;
-  padding: 1rem 1.25rem;
+  padding: 0.9rem 1.15rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -957,18 +1014,18 @@ body {
 
 .chat-messages {
   flex: 1;
-  padding: 1.25rem;
+  padding: 1.15rem;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 0.85rem;
 }
 
 .chat-bubble {
   max-width: 88%;
-  padding: 0.75rem 1rem;
+  padding: 0.7rem 0.95rem;
   border-radius: var(--radius-md);
-  font-size: 0.92rem;
+  font-size: 0.9rem;
   line-height: 1.5;
 }
 
@@ -987,7 +1044,7 @@ body {
 }
 
 .chat-input-row {
-  padding: 0.75rem 1rem;
+  padding: 0.7rem 0.9rem;
   border-top: 1px solid var(--border-color);
   display: flex;
   gap: 0.5rem;
@@ -998,8 +1055,8 @@ body {
   position: fixed;
   bottom: 24px;
   right: 24px;
-  width: 58px;
-  height: 58px;
+  width: 56px;
+  height: 56px;
   border-radius: 50%;
   background: linear-gradient(135deg, #10b981, #059669);
   color: white;
@@ -1051,18 +1108,18 @@ body {
 }
 
 @keyframes modalScale {
-  from { transform: scale(0.95); opacity: 0; }
+  from { transform: scale(0.96); opacity: 0; }
   to { transform: scale(1); opacity: 1; }
 }
 
 .modal-close-btn {
   position: absolute;
-  top: 1.25rem;
-  right: 1.25rem;
+  top: 1rem;
+  right: 1rem;
   background: var(--bg-subtle);
   border: none;
-  width: 34px;
-  height: 34px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -1070,6 +1127,7 @@ body {
   cursor: pointer;
   color: var(--text-muted);
   transition: var(--transition);
+  z-index: 10;
 }
 
 .modal-close-btn:hover {
@@ -1079,7 +1137,7 @@ body {
 
 .plant-modal-hero {
   position: relative;
-  height: 300px;
+  height: 280px;
 }
 
 .plant-modal-hero img {
@@ -1089,14 +1147,14 @@ body {
 }
 
 .plant-modal-body {
-  padding: 2rem;
+  padding: 1.75rem;
 }
 
 .detail-tab-nav {
   display: flex;
   gap: 0.5rem;
   border-bottom: 2px solid var(--border-color);
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.25rem;
 }
 
 .detail-tab-btn {
@@ -1104,9 +1162,9 @@ body {
   border: none;
   border-bottom: 2px solid transparent;
   margin-bottom: -2px;
-  padding: 0.65rem 1rem;
+  padding: 0.6rem 0.9rem;
   font-weight: 700;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   color: var(--text-muted);
   cursor: pointer;
   transition: var(--transition);
@@ -1132,17 +1190,17 @@ body {
 .toxicity-alert-box {
   background: #fef2f2;
   border: 1px solid #fecaca;
-  border-left: 6px solid #dc2626;
+  border-left: 5px solid #dc2626;
   border-radius: var(--radius-md);
-  padding: 1.25rem;
-  margin-bottom: 1.25rem;
+  padding: 1.15rem;
+  margin-bottom: 1.15rem;
 }
 
 .toxicity-alert-title {
   color: #991b1b;
-  font-size: 1.15rem;
+  font-size: 1.05rem;
   font-weight: 800;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.45rem;
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -1151,17 +1209,17 @@ body {
 .safe-alert-box {
   background: #f0fdf4;
   border: 1px solid #bbf7d0;
-  border-left: 6px solid #16a34a;
+  border-left: 5px solid #16a34a;
   border-radius: var(--radius-md);
-  padding: 1.25rem;
-  margin-bottom: 1.25rem;
+  padding: 1.15rem;
+  margin-bottom: 1.15rem;
 }
 
 .safe-alert-title {
   color: #166534;
-  font-size: 1.15rem;
+  font-size: 1.05rem;
   font-weight: 800;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.45rem;
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -1169,7 +1227,7 @@ body {
 
 .toast-container {
   position: fixed;
-  bottom: 24px;
+  bottom: 74px; /* Default above mobile bottom nav */
   left: 50%;
   transform: translateX(-50%);
   display: flex;
@@ -1182,41 +1240,227 @@ body {
 .toast {
   background: #1e293b;
   color: white;
-  padding: 0.75rem 1.4rem;
+  padding: 0.65rem 1.25rem;
   border-radius: var(--radius-full);
-  font-size: 0.9rem;
+  font-size: 0.88rem;
   font-weight: 600;
   box-shadow: var(--shadow-lg);
   display: flex;
   align-items: center;
-  gap: 0.6rem;
+  gap: 0.55rem;
   animation: toastSlideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 @keyframes toastSlideUp {
-  from { transform: translateY(20px); opacity: 0; }
+  from { transform: translateY(16px); opacity: 0; }
   to { transform: translateY(0); opacity: 1; }
 }
 
+/* ==========================================================================
+   Mobile-Screen Specific Optimizations
+   ========================================================================== */
 @media (max-width: 768px) {
-  .header-container { flex-wrap: wrap; }
-  .nav-links { order: 3; width: 100%; overflow-x: auto; padding-bottom: 0.3rem; }
-  .hero-title { font-size: 1.85rem; }
-  .form-grid { grid-template-columns: 1fr; }
-  .form-group.full-width { grid-column: span 1; }
-  .scanner-preview-card { flex-direction: column; }
-  .scanner-thumb { width: 100%; height: 180px; }
+  body {
+    padding-bottom: 72px; /* Bottom nav bar breathing room */
+  }
+
+  .nav-links {
+    display: none; /* Replaced by native bottom tab bar */
+  }
+
+  .mobile-bottom-nav {
+    display: flex;
+  }
+
+  .header-container {
+    padding: 0.65rem 1rem;
+  }
+
+  .brand {
+    font-size: 1.2rem;
+  }
+
+  .brand-icon {
+    width: 32px;
+    height: 32px;
+  }
+
+  .hero {
+    padding: 1.75rem 1rem 1.25rem;
+  }
+
+  .hero-title {
+    font-size: 1.6rem;
+  }
+
+  .hero-subtitle {
+    font-size: 0.92rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .hero-cta-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+    width: 100%;
+  }
+
+  .hero-cta-group .btn:last-child {
+    grid-column: span 2;
+  }
+
+  .main-wrapper {
+    padding: 1rem 0.75rem;
+  }
+
+  .toolbar {
+    padding: 0.75rem;
+    gap: 0.65rem;
+    margin-bottom: 1rem;
+  }
+
+  .search-input-box {
+    min-width: 100%;
+  }
+
+  .filter-pills {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    padding-bottom: 0.3rem;
+    width: 100%;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .filter-pill {
+    flex-shrink: 0;
+    font-size: 0.76rem;
+    padding: 0.3rem 0.65rem;
+  }
+
+  .plant-grid {
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 0.85rem;
+  }
+
+  .card-media-wrapper {
+    height: 175px;
+  }
+
+  .scanner-container {
+    border-radius: var(--radius-md);
+  }
+
+  .scanner-viewport-box {
+    min-height: 320px;
+  }
+
+  .scanner-video {
+    max-height: 380px;
+  }
+
+  .scanner-overlay-reticle {
+    width: 190px;
+    height: 190px;
+  }
+
+  .scanner-controls {
+    padding: 0.85rem;
+    gap: 0.65rem;
+  }
+
+  .shutter-btn {
+    width: 54px;
+    height: 54px;
+  }
+
+  .shutter-inner {
+    width: 38px;
+    height: 38px;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+    gap: 0.85rem;
+  }
+
+  .form-group.full-width {
+    grid-column: span 1;
+  }
+
+  .form-card {
+    padding: 1.25rem 1rem;
+  }
+
+  .scanner-preview-card {
+    flex-direction: column;
+    padding: 1rem;
+    gap: 0.85rem;
+  }
+
+  .scanner-thumb {
+    width: 100%;
+    height: 180px;
+  }
+
+  /* Bottom sheet style chat drawer on phones */
+  .chat-drawer {
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    max-width: 100%;
+    height: 85vh;
+    border-radius: 20px 20px 0 0;
+    border-bottom: none;
+  }
+
+  .chat-launcher {
+    bottom: 74px;
+    right: 14px;
+    width: 48px;
+    height: 48px;
+  }
+
+  .modal-overlay {
+    padding: 0;
+    align-items: flex-end;
+  }
+
+  .modal-content {
+    max-width: 100%;
+    border-radius: 20px 20px 0 0;
+    max-height: 90vh;
+  }
+
+  .plant-modal-hero {
+    height: 220px;
+  }
+
+  .plant-modal-body {
+    padding: 1.25rem 1rem;
+  }
+
+  .detail-tab-nav {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .detail-tab-btn {
+    white-space: nowrap;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.85rem;
+  }
 }
   </style>
 </head>
 <body>
 
-  <!-- Header & Navigation -->
+  <!-- Desktop Header & Navigation -->
   <header class="header">
     <div class="header-container">
       <a href="#" class="brand" onclick="window.floraVault && window.floraVault.switchView('view-explore'); return false;">
         <div class="brand-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/>
             <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>
           </svg>
@@ -1224,18 +1468,19 @@ body {
         <span>FloraVault</span>
       </a>
 
+      <!-- Desktop Nav Buttons -->
       <nav>
         <ul class="nav-links">
           <li>
             <button class="nav-btn active" data-view="view-explore">
               <span>🌿</span>
-              <span>Explore Plants</span>
+              <span>Explore</span>
             </button>
           </li>
           <li>
             <button class="nav-btn" data-view="view-scanner">
               <span>📸</span>
-              <span>Camera & AI Scan</span>
+              <span>Camera Scan</span>
             </button>
           </li>
           <li>
@@ -1247,7 +1492,7 @@ body {
           <li>
             <button class="nav-btn" data-view="view-forum">
               <span>💬</span>
-              <span>Ask Community</span>
+              <span>Community Q&A</span>
             </button>
           </li>
           <li>
@@ -1262,7 +1507,7 @@ body {
       <div class="header-actions">
         <div class="privacy-badge" id="privacyAuditBtn" title="100% Privacy Verified • Zero Trackers">
           <span class="privacy-dot"></span>
-          <span>Zero Trackers Active</span>
+          <span>Zero Trackers</span>
         </div>
       </div>
     </div>
@@ -1275,20 +1520,20 @@ body {
         Discover, Grow & Understand Plants with <span class="hero-highlight">FloraVault</span>
       </h1>
       <p class="hero-subtitle">
-        Local nursery uploads, community diagnosis, real-time AI assistance, and transparent health cons & toxicity alerts. Zero third-party trackers. Camera and Internet only.
+        Local nursery uploads, community diagnosis, real-time AI assistance, and transparent health cons & toxicity alerts. Zero third-party trackers.
       </p>
       <div class="hero-cta-group">
         <button class="btn btn-primary" onclick="window.floraVault.switchView('view-scanner')">
           <span>📸</span>
-          <span>Open Camera Scanner</span>
+          <span>Camera Scanner</span>
         </button>
         <button class="btn btn-secondary" onclick="window.floraVault.switchView('view-upload')">
           <span>🏪</span>
-          <span>Upload From Nursery</span>
+          <span>Nursery Upload</span>
         </button>
         <button class="btn btn-secondary" onclick="window.floraVault.switchView('view-forum')">
           <span>💬</span>
-          <span>Ask a Plant Question</span>
+          <span>Ask Question</span>
         </button>
       </div>
     </div>
@@ -1326,12 +1571,12 @@ body {
       <div class="scanner-container">
         <div class="scanner-header">
           <div>
-            <h2 class="scanner-title">Live Plant Camera Scanner</h2>
-            <p style="font-size: 0.85rem; color: var(--text-muted);">
-              🔒 Protected local stream: camera frames are processed directly in-browser on local canvas.
+            <h2 class="scanner-title">Live Camera Scanner</h2>
+            <p style="font-size: 0.82rem; color: var(--text-muted);">
+              🔒 Protected local stream: camera frames are processed on in-browser canvas.
             </p>
           </div>
-          <span id="scannerStatus" style="font-size: 0.82rem; font-weight: 600; color: var(--primary);">
+          <span id="scannerStatus" style="font-size: 0.8rem; font-weight: 600; color: var(--primary);">
             Camera ready
           </span>
         </div>
@@ -1349,41 +1594,41 @@ body {
         </div>
 
         <div class="scanner-controls">
-          <button class="btn btn-primary" id="startCameraBtn">
+          <button class="btn btn-primary btn-sm" id="startCameraBtn">
             <span>🎥</span>
-            <span>Start Camera</span>
+            <span>Start</span>
           </button>
-          <button class="btn btn-secondary" id="stopCameraBtn" style="display: none;">
+          <button class="btn btn-secondary btn-sm" id="stopCameraBtn" style="display: none;">
             <span>⏹️</span>
-            <span>Stop Camera</span>
+            <span>Stop</span>
           </button>
 
           <button class="shutter-btn" id="shutterBtn" title="Take Plant Snapshot" disabled>
             <div class="shutter-inner"></div>
           </button>
 
-          <button class="btn btn-secondary" id="flipCameraBtn" title="Flip Camera (Front/Rear)">
+          <button class="btn btn-secondary btn-sm" id="flipCameraBtn" title="Flip Camera">
             <span>🔄</span>
             <span>Flip</span>
           </button>
         </div>
       </div>
 
-      <div id="scannerPreview" class="scanner-preview-card" style="display: none; max-width: 820px; margin: 1.5rem auto 0;">
+      <div id="scannerPreview" class="scanner-preview-card" style="display: none; max-width: 820px; margin: 1.25rem auto 0;">
         <img id="scannerThumb" class="scanner-thumb" alt="Captured Plant Photo" />
         <div style="flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 0.75rem;">
-          <h3 style="font-size: 1.25rem; font-weight: 700;">Captured Plant Snapshot</h3>
-          <p style="font-size: 0.9rem; color: var(--text-muted);">
+          <h3 style="font-size: 1.15rem; font-weight: 700;">Captured Plant Snapshot</h3>
+          <p style="font-size: 0.85rem; color: var(--text-muted);">
             Analyze this photo using FloraAI for instant identification, care guide, and health cons.
           </p>
-          <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
-            <button class="btn btn-primary" id="aiAnalyzeBtn">
+          <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+            <button class="btn btn-primary btn-sm" id="aiAnalyzeBtn">
               <span>🩺</span>
-              <span>Diagnose Plant & Check Cons</span>
+              <span>Diagnose Plant & Health Cons</span>
             </button>
-            <button class="btn btn-secondary" id="useForUploadBtn">
+            <button class="btn btn-secondary btn-sm" id="useForUploadBtn">
               <span>🏪</span>
-              <span>Use For Nursery Upload</span>
+              <span>Use in Nursery Upload</span>
             </button>
           </div>
           <div id="scannerAiResults"></div>
@@ -1447,7 +1692,7 @@ body {
 
             <div class="form-group full-width">
               <label class="form-label">Plant Photo Source</label>
-              <div style="display: flex; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 0.5rem;">
+              <div style="display: flex; gap: 0.65rem; flex-wrap: wrap; margin-bottom: 0.4rem;">
                 <label class="btn btn-secondary btn-sm" style="cursor: pointer;">
                   <span>📁</span>
                   <span>Choose Image File</span>
@@ -1459,7 +1704,7 @@ body {
                 </button>
               </div>
 
-              <div id="photoPreviewContainer" style="display: none; margin-top: 0.5rem;">
+              <div id="photoPreviewContainer" style="display: none; margin-top: 0.4rem;">
                 <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.35rem;">Selected Photo Preview:</p>
                 <img id="formPhotoPreview" src="" alt="Preview" style="max-height: 180px; border-radius: 8px; border: 1px solid var(--border-color); object-fit: cover;" />
               </div>
@@ -1502,18 +1747,18 @@ Ornamental balcony focal point"></textarea>
           <div class="form-hazard-box">
             <div class="hazard-toggle-row">
               <div>
-                <h4 style="font-size: 1.05rem; font-weight: 800; color: #991b1b; display: flex; align-items: center; gap: 0.4rem;">
+                <h4 style="font-size: 1rem; font-weight: 800; color: #991b1b; display: flex; align-items: center; gap: 0.35rem;">
                   <span>⚠️</span>
-                  <span>Health Cons & Toxicity Hazard Assessment</span>
+                  <span>Health Cons & Toxicity Assessment</span>
                 </h4>
-                <p style="font-size: 0.85rem; color: #b91c1c;">
+                <p style="font-size: 0.82rem; color: #b91c1c;">
                   Is this plant toxic or hazardous to humans, children, or pets?
                 </p>
               </div>
 
-              <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; font-weight: 700; color: #991b1b;">
-                <input type="checkbox" id="toxicToggle" style="width: 20px; height: 20px; accent-color: #dc2626;" />
-                <span>Yes, Has Health Cons</span>
+              <label style="display: flex; align-items: center; gap: 0.4rem; cursor: pointer; font-weight: 700; color: #991b1b; font-size: 0.88rem;">
+                <input type="checkbox" id="toxicToggle" style="width: 18px; height: 18px; accent-color: #dc2626;" />
+                <span>Yes, Has Cons</span>
               </label>
             </div>
 
@@ -1530,30 +1775,30 @@ Ornamental balcony focal point"></textarea>
                 </div>
 
                 <div class="form-group">
-                  <label class="form-label">High Risk Groups (Select all that apply)</label>
-                  <div style="display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 0.4rem;">
-                    <label style="font-size: 0.85rem; display: flex; align-items: center; gap: 0.3rem;">
+                  <label class="form-label">High Risk Groups</label>
+                  <div style="display: flex; gap: 0.65rem; flex-wrap: wrap; margin-top: 0.35rem;">
+                    <label style="font-size: 0.82rem; display: flex; align-items: center; gap: 0.25rem;">
                       <input type="checkbox" name="riskGroup" value="Cats" checked /> Cats
                     </label>
-                    <label style="font-size: 0.85rem; display: flex; align-items: center; gap: 0.3rem;">
+                    <label style="font-size: 0.82rem; display: flex; align-items: center; gap: 0.25rem;">
                       <input type="checkbox" name="riskGroup" value="Dogs" checked /> Dogs
                     </label>
-                    <label style="font-size: 0.85rem; display: flex; align-items: center; gap: 0.3rem;">
+                    <label style="font-size: 0.82rem; display: flex; align-items: center; gap: 0.25rem;">
                       <input type="checkbox" name="riskGroup" value="Toddlers / Children" checked /> Children
                     </label>
-                    <label style="font-size: 0.85rem; display: flex; align-items: center; gap: 0.3rem;">
+                    <label style="font-size: 0.82rem; display: flex; align-items: center; gap: 0.25rem;">
                       <input type="checkbox" name="riskGroup" value="Skin Contact" /> Skin Contact
                     </label>
                   </div>
                 </div>
 
                 <div class="form-group full-width">
-                  <label class="form-label" for="uploadCompounds">Active Harmful Chemicals / Compounds</label>
+                  <label class="form-label" for="uploadCompounds">Active Harmful Chemicals</label>
                   <input type="text" id="uploadCompounds" class="form-input" placeholder="e.g. Insoluble calcium oxalate crystals, Saponins, Cardiac glycosides" />
                 </div>
 
                 <div class="form-group full-width">
-                  <label class="form-label" for="uploadSymptoms">Symptoms of Poisoning / Exposure</label>
+                  <label class="form-label" for="uploadSymptoms">Symptoms of Exposure</label>
                   <textarea id="uploadSymptoms" class="form-textarea" placeholder="e.g. Severe mouth burning, drooling, tongue swelling, vomiting..."></textarea>
                 </div>
 
@@ -1566,7 +1811,7 @@ Ornamental balcony focal point"></textarea>
           </div>
 
           <div style="text-align: right;">
-            <button type="submit" class="btn btn-primary" style="padding: 0.8rem 2rem;">
+            <button type="submit" class="btn btn-primary" style="padding: 0.75rem 1.75rem;">
               <span>🌱</span>
               <span>Publish Plant Listing</span>
             </button>
@@ -1580,14 +1825,14 @@ Ornamental balcony focal point"></textarea>
       <div class="forum-container">
         <div class="forum-header-bar">
           <div>
-            <h2 style="font-size: 1.65rem; font-weight: 800; letter-spacing: -0.02em;">Ask & Discuss Plants</h2>
-            <p style="color: var(--text-muted); font-size: 0.95rem;">
-              Get real-time answers from FloraAI Doctor, certified nursery experts, and community growers.
+            <h2 style="font-size: 1.5rem; font-weight: 800; letter-spacing: -0.02em;">Ask & Discuss Plants</h2>
+            <p style="color: var(--text-muted); font-size: 0.88rem;">
+              Real-time answers from FloraAI Doctor, certified nursery experts, and community growers.
             </p>
           </div>
-          <button class="btn btn-primary" id="askQuestionBtn">
+          <button class="btn btn-primary btn-sm" id="askQuestionBtn">
             <span>➕</span>
-            <span>Ask a Question</span>
+            <span>Ask</span>
           </button>
         </div>
 
@@ -1598,9 +1843,9 @@ Ornamental balcony focal point"></textarea>
     <!-- VIEW 5: BLOG -->
     <section id="view-blog" class="view-section">
       <div style="max-width: 1100px; margin: 0 auto;">
-        <div style="margin-bottom: 2rem;">
-          <h2 style="font-size: 1.85rem; font-weight: 800;">Botanical Knowledge & Care Blog</h2>
-          <p style="color: var(--text-muted); font-size: 1rem;">
+        <div style="margin-bottom: 1.5rem;">
+          <h2 style="font-size: 1.75rem; font-weight: 800;">Botanical Knowledge & Care Blog</h2>
+          <p style="color: var(--text-muted); font-size: 0.95rem;">
             Evidence-based guides on plant care requirements, medicinal uses, and vital safety warnings.
           </p>
         </div>
@@ -1611,9 +1856,33 @@ Ornamental balcony focal point"></textarea>
 
   </main>
 
+  <!-- Mobile Bottom Navigation Bar -->
+  <nav class="mobile-bottom-nav">
+    <button class="mobile-nav-btn active" data-view="view-explore">
+      <span class="mobile-nav-icon">🌿</span>
+      <span class="mobile-nav-label">Explore</span>
+    </button>
+    <button class="mobile-nav-btn" data-view="view-scanner">
+      <span class="mobile-nav-icon">📸</span>
+      <span class="mobile-nav-label">Scanner</span>
+    </button>
+    <button class="mobile-nav-btn" data-view="view-upload">
+      <span class="mobile-nav-icon">➕</span>
+      <span class="mobile-nav-label">Upload</span>
+    </button>
+    <button class="mobile-nav-btn" data-view="view-forum">
+      <span class="mobile-nav-icon">💬</span>
+      <span class="mobile-nav-label">Q&A</span>
+    </button>
+    <button class="mobile-nav-btn" data-view="view-blog">
+      <span class="mobile-nav-icon">📖</span>
+      <span class="mobile-nav-label">Blog</span>
+    </button>
+  </nav>
+
   <!-- FloraAI Real-Time Floating Advisor Widget -->
   <button class="chat-launcher" id="chatLauncher" title="Chat with FloraAI Plant Doctor">
-    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
       <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
     </svg>
   </button>
@@ -1623,17 +1892,17 @@ Ornamental balcony focal point"></textarea>
       <div style="display: flex; align-items: center; gap: 0.5rem;">
         <span style="font-size: 1.25rem;">🤖</span>
         <div>
-          <h3 style="font-size: 1rem; font-weight: 800; line-height: 1.2;">FloraAI Plant Doctor</h3>
+          <h3 style="font-size: 0.95rem; font-weight: 800; line-height: 1.2;">FloraAI Plant Doctor</h3>
           <span style="font-size: 0.72rem; opacity: 0.9;">Real-Time Answers • Toxicity Radar</span>
         </div>
       </div>
       <button id="closeChatBtn" style="background: transparent; border: none; color: white; cursor: pointer; font-size: 1.25rem;">✕</button>
     </div>
 
-    <div style="padding: 0.5rem 0.75rem; background: var(--bg-subtle); display: flex; gap: 0.4rem; overflow-x: auto; border-bottom: 1px solid var(--border-color);">
-      <button class="filter-pill quick-prompt-pill" style="white-space: nowrap; font-size: 0.72rem;">🚨 Is Monstera toxic?</button>
-      <button class="filter-pill quick-prompt-pill" style="white-space: nowrap; font-size: 0.72rem;">🌿 Yellow leaves fix</button>
-      <button class="filter-pill quick-prompt-pill" style="white-space: nowrap; font-size: 0.72rem;">🐶 Pet-safe balcony plants</button>
+    <div style="padding: 0.45rem 0.65rem; background: var(--bg-subtle); display: flex; gap: 0.35rem; overflow-x: auto; border-bottom: 1px solid var(--border-color); -webkit-overflow-scrolling: touch;">
+      <button class="filter-pill quick-prompt-pill" style="white-space: nowrap; font-size: 0.7rem;">🚨 Is Monstera toxic?</button>
+      <button class="filter-pill quick-prompt-pill" style="white-space: nowrap; font-size: 0.7rem;">🌿 Yellow leaves fix</button>
+      <button class="filter-pill quick-prompt-pill" style="white-space: nowrap; font-size: 0.7rem;">🐶 Pet-safe balcony plants</button>
     </div>
 
     <div class="chat-messages" id="chatMessages">
@@ -1644,7 +1913,7 @@ Ornamental balcony focal point"></textarea>
     </div>
 
     <div class="chat-input-row">
-      <input type="text" id="chatInput" placeholder="Ask about care, symptoms, or toxicity..." class="form-input" style="font-size: 0.88rem;" />
+      <input type="text" id="chatInput" placeholder="Ask about care, symptoms, or toxicity..." class="form-input" style="font-size: 0.85rem;" />
       <button class="btn btn-primary btn-sm" id="sendChatBtn">Send</button>
     </div>
   </div>
@@ -1658,32 +1927,32 @@ Ornamental balcony focal point"></textarea>
   </div>
 
   <div class="modal-overlay" id="askQuestionModal">
-    <div class="modal-content" style="max-width: 620px; padding: 2rem;">
+    <div class="modal-content" style="max-width: 620px; padding: 1.5rem;">
       <button class="modal-close-btn" title="Close">✕</button>
-      <h2 style="font-size: 1.5rem; font-weight: 800; margin-bottom: 0.5rem;">Ask About a Plant</h2>
-      <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.5rem;">
+      <h2 style="font-size: 1.35rem; font-weight: 800; margin-bottom: 0.4rem;">Ask About a Plant</h2>
+      <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1.25rem;">
         Describe your plant issue. FloraAI and nursery community members will provide diagnosis.
       </p>
 
       <form id="askQuestionForm">
-        <div class="form-group" style="margin-bottom: 1rem;">
+        <div class="form-group" style="margin-bottom: 0.85rem;">
           <label class="form-label" for="newQuestionTitle">Question Title *</label>
           <input type="text" id="newQuestionTitle" class="form-input" placeholder="e.g. Why are my Fiddle Leaf Fig leaves drooping?" required />
         </div>
 
-        <div class="form-group" style="margin-bottom: 1rem;">
+        <div class="form-group" style="margin-bottom: 0.85rem;">
           <label class="form-label" for="newQuestionPlant">Plant Name</label>
           <input type="text" id="newQuestionPlant" class="form-input" placeholder="e.g. Monstera / Snake Plant / Peace Lily" />
         </div>
 
-        <div class="form-group" style="margin-bottom: 1.5rem;">
+        <div class="form-group" style="margin-bottom: 1.25rem;">
           <label class="form-label" for="newQuestionContent">Details & Symptoms *</label>
-          <textarea id="newQuestionContent" class="form-textarea" placeholder="Describe lighting conditions, watering frequency, soil moisture, and any visible pests..." required></textarea>
+          <textarea id="newQuestionContent" class="form-textarea" placeholder="Describe lighting conditions, watering frequency, soil moisture, and visible symptoms..." required></textarea>
         </div>
 
-        <div style="display: flex; justify-content: flex-end; gap: 0.75rem;">
-          <button type="button" class="btn btn-secondary" onclick="window.floraVault.closeAllModals()">Cancel</button>
-          <button type="submit" class="btn btn-primary">Post Question & Get AI Diagnosis</button>
+        <div style="display: flex; justify-content: flex-end; gap: 0.65rem;">
+          <button type="button" class="btn btn-secondary btn-sm" onclick="window.floraVault.closeAllModals()">Cancel</button>
+          <button type="submit" class="btn btn-primary btn-sm">Post Question</button>
         </div>
       </form>
     </div>
@@ -1709,7 +1978,7 @@ Ornamental balcony focal point"></textarea>
   <script>
   (function() {
     // =========================================================================
-    // 1. Botanical Dataset
+    // 1. Botanical Dataset with Optimized Images & Health Cons
     // =========================================================================
     const INITIAL_PLANTS = [
       {
@@ -1723,15 +1992,14 @@ Ornamental balcony focal point"></textarea>
           contact: "verdantcanopy@plants.local",
           price: "$28.00"
         },
-        image: "https://images.unsplash.com/photo-1614594975525-e45190c55d0b?auto=format&fit=crop&w=800&q=80",
+        image: "https://images.unsplash.com/photo-1614594975525-e45190c55d0b?auto=format&fit=crop&w=700&q=80",
         description: "Known as the Swiss Cheese Plant, Monstera is famous for its dramatic fenestrated foliage. It thrives indoors with moderate indirect sunlight.",
         care: {
           sunlight: "Bright Indirect Light",
           watering: "Every 1-2 weeks; allow top 2 inches of soil to dry out",
           soil: "Well-draining, peat-based potting mix with perlite and orchid bark",
           temperature: "18°C - 30°C (65°F - 85°F)",
-          humidity: "60% - 80% (Enjoys misting or pebble trays)",
-          fertilizer: "Balanced liquid fertilizer once a month during spring and summer"
+          humidity: "60% - 80% (Enjoys misting or pebble trays)"
         },
         uses: [
           "Interior aesthetic focal point with tropical vibe",
@@ -1760,15 +2028,13 @@ Ornamental balcony focal point"></textarea>
           contact: "heritagegreens@botanical.local",
           price: "$18.50"
         },
-        image: "https://images.unsplash.com/photo-1593691509543-c55fb32e7355?auto=format&fit=crop&w=800&q=80",
+        image: "https://images.unsplash.com/photo-1593691509543-c55fb32e7355?auto=format&fit=crop&w=700&q=80",
         description: "Nearly indestructible, the Snake Plant features architectural sword-like leaves with yellow-green borders. Excellent for beginners and bedrooms.",
         care: {
           sunlight: "Low to Bright Indirect Light (Very tolerant)",
           watering: "Every 2-3 weeks; let soil dry completely between waterings",
           soil: "Free-draining succulent or cactus mix with coarse sand",
-          temperature: "15°C - 29°C (60°F - 85°F)",
-          humidity: "Tolerates low indoor humidity (30% - 50%)",
-          fertilizer: "Mild houseplant fertilizer once in spring"
+          temperature: "15°C - 29°C (60°F - 85°F)"
         },
         uses: [
           "NASA Clean Air certified: absorbs benzene, formaldehyde, and xylene",
@@ -1797,15 +2063,13 @@ Ornamental balcony focal point"></textarea>
           contact: "sunnysprout@eco.local",
           price: "$14.00"
         },
-        image: "https://images.unsplash.com/photo-1572688484437-31820e39ec14?auto=format&fit=crop&w=800&q=80",
-        description: "A joyful, cascading houseplant producing arching green leaves with white stripes and delicate 'spiderettes' (offsets) that dangle like chandeliers.",
+        image: "https://images.unsplash.com/photo-1572688484437-31820e39ec14?auto=format&fit=crop&w=700&q=80",
+        description: "A joyful, cascading houseplant producing arching green leaves with white stripes and delicate dangling plantlets.",
         care: {
           sunlight: "Medium to Bright Indirect Sunlight",
           watering: "Once a week; keep soil lightly moist but never soggy",
           soil: "Standard organic potting soil with perlite",
-          temperature: "13°C - 27°C (55°F - 80°F)",
-          humidity: "Moderate indoor humidity (40% - 60%)",
-          fertilizer: "Organic compost tea or diluted liquid feed twice during spring"
+          temperature: "13°C - 27°C (55°F - 80°F)"
         },
         uses: [
           "100% Non-Toxic and Pet Safe (ASPCA verified)",
@@ -1817,8 +2081,8 @@ Ornamental balcony focal point"></textarea>
           severity: "Non-Toxic / Completely Safe",
           riskGroups: ["None (Safe for Cats, Dogs, and Children)"],
           compounds: "None. Contains mild curiosity effect similar to catnip for cats.",
-          symptoms: "None toxic. Ingestion of excessive plant fiber may rarely cause minor stomach upset.",
-          precautions: "No special toxicity precautions required. Safe around households with puppies and toddlers."
+          symptoms: "None toxic. Safe for homes with playful pets.",
+          precautions: "No special toxicity precautions required."
         },
         tags: ["Pet Safe", "Air Purifier", "Beginner Friendly", "Hanging Basket"],
         dateAdded: "2026-10-22"
@@ -1834,15 +2098,13 @@ Ornamental balcony focal point"></textarea>
           contact: "medflora@nursery.local",
           price: "$22.00"
         },
-        image: "https://images.unsplash.com/photo-1596724898380-0a2a4b8df29d?auto=format&fit=crop&w=800&q=80",
-        description: "An evergreen subtropical shrub with clusters of fragrant deep pink blossoms. Extremely heat-hardy, but EXTREMELY toxic.",
+        image: "https://images.unsplash.com/photo-1596724898380-0a2a4b8df29d?auto=format&fit=crop&w=700&q=80",
+        description: "An evergreen subtropical shrub with fragrant deep pink blossoms. Extremely heat-hardy, but EXTREMELY toxic.",
         care: {
           sunlight: "Full Direct Sun (6+ hours daily)",
           watering: "Deep soak every 1-2 weeks; highly drought-resistant once established",
           soil: "Tolerates poor, sandy, alkaline, or clay soils with good drainage",
-          temperature: "-5°C - 45°C (Hardy down to 20°F)",
-          humidity: "Thrives in dry, arid to semi-humid coastal conditions",
-          fertilizer: "Minimal; light general fertilizer in spring"
+          temperature: "-5°C - 45°C (Hardy down to 20°F)"
         },
         uses: [
           "Highway sound buffer and windbreak hedge in warm climates",
@@ -1854,10 +2116,10 @@ Ornamental balcony focal point"></textarea>
           severity: "CRITICAL / DEADLY",
           riskGroups: ["Humans", "Children", "Dogs", "Cats", "Horses", "Livestock"],
           compounds: "Cardiac Glycosides (Oleandrin and Neriine)",
-          symptoms: "Severe irregular heartbeat (arrhythmia), hypothermia, slow pulse, abdominal pain, severe vomiting, seizures, coma, and potential fatality within hours if ingested. Burning oleander branches emits toxic smoke.",
+          symptoms: "Severe irregular heartbeat (arrhythmia), hypothermia, slow pulse, abdominal pain, severe vomiting, seizures, coma, and potential fatality within hours if ingested.",
           precautions: "NEVER plant in yards frequented by small children or pets. Wear heavy duty protective gloves when pruning. NEVER use branches as skewers for food or burn clippings in fires."
         },
-        tags: ["Outdoor", "Flowering", "Drought Tolerant", "EXTREMELY TOXIC", "Cardiac Hazard"],
+        tags: ["Outdoor", "Flowering", "Drought Tolerant", "EXTREMELY TOXIC"],
         dateAdded: "2026-10-25"
       },
       {
@@ -1871,15 +2133,13 @@ Ornamental balcony focal point"></textarea>
           contact: "ayurgreen@herbs.local",
           price: "$9.50"
         },
-        image: "https://images.unsplash.com/photo-1618164435735-413d3b066c9a?auto=format&fit=crop&w=800&q=80",
+        image: "https://images.unsplash.com/photo-1618164435735-413d3b066c9a?auto=format&fit=crop&w=700&q=80",
         description: "Revered in Ayurvedic medicine as the 'Queen of Herbs', Tulsi is a sacred aromatic plant with purplish-green leaves rich in soothing essential oils.",
         care: {
           sunlight: "Full Sun to Bright Morning Sun (4-6 hours direct)",
           watering: "Daily in hot summers; keep soil moist but never waterlogged",
           soil: "Rich, well-aerated organic loamy soil rich in compost",
-          temperature: "20°C - 35°C (68°F - 95°F); cannot tolerate frost",
-          humidity: "Medium to High humidity (50% - 70%)",
-          fertilizer: "Neem cake powder or vermicompost every 3 weeks"
+          temperature: "20°C - 35°C (68°F - 95°F); cannot tolerate frost"
         },
         uses: [
           "Herbal tea infusion to boost immunity and relieve respiratory congestion",
@@ -1893,7 +2153,7 @@ Ornamental balcony focal point"></textarea>
           riskGroups: ["None (Safe for humans and pets)"],
           compounds: "Beneficial phytochemicals (Eugenol, Ursolic acid, Rosmarinic acid).",
           symptoms: "None in normal dietary amounts.",
-          precautions: "Safe for regular herbal consumption. Pregnant individuals should consult a physician before consuming large therapeutic doses."
+          precautions: "Safe for regular herbal consumption."
         },
         tags: ["Medicinal", "Ayurvedic", "Pet Safe", "Edible", "Aromatic"],
         dateAdded: "2026-10-28"
@@ -1909,15 +2169,13 @@ Ornamental balcony focal point"></textarea>
           contact: "verdantcanopy@plants.local",
           price: "$24.00"
         },
-        image: "https://images.unsplash.com/photo-1598880940080-ff9a29891b85?auto=format&fit=crop&w=800&q=80",
-        description: "Stunning broad variegated leaves splashed with cream and lime green. A popular interior plant, but historically notorious for sap that numbs vocal cords.",
+        image: "https://images.unsplash.com/photo-1598880940080-ff9a29891b85?auto=format&fit=crop&w=700&q=80",
+        description: "Stunning broad variegated leaves splashed with cream and lime green. A popular interior plant with needle-like calcium oxalate crystals.",
         care: {
           sunlight: "Filtered Bright Indirect Light (Avoid harsh direct sun)",
           watering: "Allow top inch to dry; reduce watering in winter",
           soil: "Aerated peat-perlite potting mix",
-          temperature: "18°C - 27°C (65°F - 80°F)",
-          humidity: "Prefers high humidity (60%+)",
-          fertilizer: "Diluted liquid foliage feed every 4 weeks in warm months"
+          temperature: "18°C - 27°C (65°F - 80°F)"
         },
         uses: [
           "Large architectural statement plant for offices and living rooms",
@@ -1946,15 +2204,13 @@ Ornamental balcony focal point"></textarea>
           contact: "sunnysprout@eco.local",
           price: "$12.00"
         },
-        image: "https://images.unsplash.com/photo-1596547609652-9cf5d8d76921?auto=format&fit=crop&w=800&q=80",
+        image: "https://images.unsplash.com/photo-1596547609652-9cf5d8d76921?auto=format&fit=crop&w=700&q=80",
         description: "Famous succulent with fleshy serrated leaves filled with cool, soothing gel. Known for millennia as the first-aid burn plant.",
         care: {
           sunlight: "Bright Direct to Indirect Light (South or West facing windows)",
           watering: "Deep water every 3 weeks; soil must dry completely",
           soil: "Cactus & succulent mix with pumice, perlite, and sand",
-          temperature: "15°C - 30°C (Avoid freezing temperatures)",
-          humidity: "Low humidity; dry air preferred",
-          fertilizer: "Rarely needed; 1 light feeding in mid-spring"
+          temperature: "15°C - 30°C (Avoid freezing temperatures)"
         },
         uses: [
           "Topical soothing gel for minor kitchen burns, sunburns, and cuts",
@@ -1967,7 +2223,7 @@ Ornamental balcony focal point"></textarea>
           riskGroups: ["Dogs", "Cats", "Internal Human Consumption without prep"],
           compounds: "Aloin (yellow sap latex beneath the rind) & Saponins",
           symptoms: "The clear gel is safe for human skin, BUT the yellow latex rind contains aloin: causes abdominal cramping, vomiting, red urine, and severe diarrhea in pets.",
-          precautions: "Safe for human topical use. Strip out the yellow bitter latex layer completely if consuming gel. Keep pot out of reach of curious dogs and cats."
+          precautions: "Safe for human topical use. Strip out yellow bitter latex layer completely if consuming gel. Keep pot out of reach of pets."
         },
         tags: ["Succulent", "Medicinal", "Burn Relief", "Caution with Pets"],
         dateAdded: "2026-11-02"
@@ -1983,15 +2239,13 @@ Ornamental balcony focal point"></textarea>
           contact: "heritagegreens@botanical.local",
           price: "$21.00"
         },
-        image: "https://images.unsplash.com/photo-1596724816995-1f9518d6a894?auto=format&fit=crop&w=800&q=80",
+        image: "https://images.unsplash.com/photo-1596724816995-1f9518d6a894?auto=format&fit=crop&w=700&q=80",
         description: "Classic Victorian fern with lush arching fronds that spill gracefully. Highly effective natural humidifier and 100% pet-friendly.",
         care: {
           sunlight: "Gentle Morning Light or Dappled Shade (No harsh direct sun)",
           watering: "Keep soil consistently damp; mist fronds frequently",
           soil: "Rich, moisture-retentive peat soil with vermiculite",
-          temperature: "16°C - 24°C (60°F - 75°F)",
-          humidity: "High humidity required (70%+). Perfect for bathrooms!",
-          fertilizer: "Half-strength liquid fern fertilizer every month in spring/summer"
+          temperature: "16°C - 24°C (60°F - 75°F)"
         },
         uses: [
           "Completely pet safe (Non-toxic to cats and dogs)",
@@ -2004,10 +2258,146 @@ Ornamental balcony focal point"></textarea>
           riskGroups: ["None"],
           compounds: "Non-toxic organic plant matter",
           symptoms: "None. Completely safe if chewed by puppies or kittens.",
-          precautions: "No toxicity precautions needed. Safe for family nurseries and pet-filled apartments."
+          precautions: "No toxicity precautions needed."
         },
         tags: ["Pet Safe", "High Humidity", "Air Purifier", "Bathroom Plant"],
         dateAdded: "2026-11-03"
+      },
+      {
+        id: "plant-9",
+        name: "Golden Pothos (Devil's Ivy)",
+        scientificName: "Epipremnum aureum",
+        category: "Indoor",
+        nursery: {
+          name: "Verdant Canopy Nursery",
+          location: "Green Valley, Block 4",
+          contact: "verdantcanopy@plants.local",
+          price: "$16.00"
+        },
+        image: "https://images.unsplash.com/photo-1597055181300-e3633a207518?auto=format&fit=crop&w=700&q=80",
+        description: "Fast-growing trailing vine with heart-shaped leaves variegated in green and gold. Nearly unkillable indoors.",
+        care: {
+          sunlight: "Low to Bright Indirect Light",
+          watering: "Every 7-10 days; let top 2 inches dry",
+          soil: "Standard aerated potting mix",
+          temperature: "17°C - 29°C"
+        },
+        uses: [
+          "Top NASA air purifier absorbing VOCs like formaldehyde and benzene",
+          "Ideal for hanging baskets, shelves, and climbing moss poles"
+        ],
+        toxicity: {
+          isDangerous: true,
+          severity: "Moderate Oral Irritant",
+          riskGroups: ["Cats", "Dogs"],
+          compounds: "Calcium oxalate crystals",
+          symptoms: "Oral irritation, drooling, vomiting, difficulty swallowing if leaves are chewed.",
+          precautions: "Hang high on macrame hangers to keep out of pet reach."
+        },
+        tags: ["Trailing Vine", "Low Light", "Air Purifier", "Toxic to Pets"],
+        dateAdded: "2026-11-04"
+      },
+      {
+        id: "plant-10",
+        name: "ZZ Plant",
+        scientificName: "Zamioculcas zamiifolia",
+        category: "Indoor",
+        nursery: {
+          name: "Sunny Sprout Gardens",
+          location: "Northside Eco Hub, Bay 2",
+          contact: "sunnysprout@eco.local",
+          price: "$23.00"
+        },
+        image: "https://images.unsplash.com/photo-1632207691143-643e2a9a9361?auto=format&fit=crop&w=700&q=80",
+        description: "Features glossy, feather-shaped dark green leaves stemming from thick underground rhizomes that store water.",
+        care: {
+          sunlight: "Low to Bright Indirect (Survives fluorescent office lighting)",
+          watering: "Once every 3-4 weeks; prefers dry soil",
+          soil: "Well-draining chunky mix with pumice",
+          temperature: "18°C - 28°C"
+        },
+        uses: [
+          "Thrives in windowless offices and low-light hallways",
+          "Natural air purifier removing toluene and xylene"
+        ],
+        toxicity: {
+          isDangerous: true,
+          severity: "Mild to Moderate",
+          riskGroups: ["Cats", "Dogs", "Skin"],
+          compounds: "Insoluble calcium oxalates",
+          symptoms: "Mouth burning and stomach upset if ingested. Skin irritation from sap in sensitive individuals.",
+          precautions: "Wash hands after handling cuttings; keep away from chewing pets."
+        },
+        tags: ["Low Light", "Drought Tolerant", "Office Plant", "Toxic to Pets"],
+        dateAdded: "2026-11-04"
+      },
+      {
+        id: "plant-11",
+        name: "English Lavender",
+        scientificName: "Lavandula angustifolia",
+        category: "Medicinal",
+        nursery: {
+          name: "AyurGreen Herbal Sanctuary",
+          location: "East Herbal District, Row 3",
+          contact: "ayurgreen@herbs.local",
+          price: "$11.00"
+        },
+        image: "https://images.unsplash.com/photo-1528183429752-a97d0bf99b5a?auto=format&fit=crop&w=700&q=80",
+        description: "Fragrant purple flowering shrub renowned globally for relaxing aromatherapy and pollinator-friendly garden beauty.",
+        care: {
+          sunlight: "Full Direct Sun (6+ hours daily)",
+          watering: "Deep water every 1-2 weeks; never allow wet roots",
+          soil: "Sandy, alkaline, low-nutrient well-draining soil",
+          temperature: "-15°C - 35°C (Winter hardy)"
+        },
+        uses: [
+          "Aromatherapy: essential linalool oils proven to reduce anxiety and aid deep sleep",
+          "Culinary flavoring, herbal teas, and natural moth repellent sachets"
+        ],
+        toxicity: {
+          isDangerous: true,
+          severity: "Mild (Pets Only)",
+          riskGroups: ["Cats", "Dogs"],
+          compounds: "Linalool and linalyl acetate",
+          symptoms: "Safe for humans, but large amounts ingested by pets can cause nausea, vomiting, and lack of appetite.",
+          precautions: "Keep dried lavender sachets and concentrated oils away from cats."
+        },
+        tags: ["Medicinal", "Aromatic", "Flowering", "Sleep Aid"],
+        dateAdded: "2026-11-05"
+      },
+      {
+        id: "plant-12",
+        name: "Jade Plant (Money Tree)",
+        scientificName: "Crassula ovata",
+        category: "Succulent",
+        nursery: {
+          name: "Mediterranean Flora Estate",
+          location: "Highway 10, Farm 7",
+          contact: "medflora@nursery.local",
+          price: "$17.00"
+        },
+        image: "https://images.unsplash.com/photo-1509423350716-97f9360b4e09?auto=format&fit=crop&w=700&q=80",
+        description: "Classic bonsai-like succulent with thick woody stems and plump, jade-green leaves. Associated with prosperity and longevity.",
+        care: {
+          sunlight: "4+ hours of direct or bright indirect sunlight",
+          watering: "Every 2-3 weeks; soak and dry method",
+          soil: "Cactus and succulent gritty mix",
+          temperature: "15°C - 26°C"
+        },
+        uses: [
+          "Traditional Feng Shui plant symbolizing wealth and good fortune",
+          "Long-lived succulent that can survive for decades with minimal maintenance"
+        ],
+        toxicity: {
+          isDangerous: true,
+          severity: "Moderate Toxicity to Pets",
+          riskGroups: ["Cats", "Dogs"],
+          compounds: "Unknown toxic principle (crassulacean saponins)",
+          symptoms: "Vomiting, depression, slow heart rate, and loss of muscle coordination in dogs and cats.",
+          precautions: "Keep on high window ledges away from curious pets."
+        },
+        tags: ["Succulent", "Feng Shui", "Drought Tolerant", "Toxic to Pets"],
+        dateAdded: "2026-11-05"
       }
     ];
 
@@ -2074,7 +2464,7 @@ Ornamental balcony focal point"></textarea>
         date: "November 2, 2026",
         readTime: "6 min read",
         category: "Safety & Toxicity",
-        coverImage: "https://images.unsplash.com/photo-1545241047-6083a3684587?auto=format&fit=crop&w=1000&q=80",
+        coverImage: "https://images.unsplash.com/photo-1545241047-6083a3684587?auto=format&fit=crop&w=800&q=80",
         summary: "From Dieffenbachia to Oleander, discover the chemical defense mechanisms of popular nursery plants, their health hazards for children and pets, and safe precautions.",
         content: `### Beauty With A Bite: Why Plants Produce Toxins
 Plants cannot run away from predators. Over millions of years, they developed sophisticated chemical defense arsenals. When we invite these lush botanical wonders into our living rooms, we must understand their biochemical nature.
@@ -2097,7 +2487,7 @@ Oleander is a staple for drought-tolerant flowers.
         date: "October 29, 2026",
         readTime: "5 min read",
         category: "Medicinal & Wellness",
-        coverImage: "https://images.unsplash.com/photo-1512428559087-560fa5ceab42?auto=format&fit=crop&w=1000&q=80",
+        coverImage: "https://images.unsplash.com/photo-1512428559087-560fa5ceab42?auto=format&fit=crop&w=800&q=80",
         summary: "How to cultivate and prepare Holy Basil, Aloe Vera, and Mint on a standard apartment balcony, with verified health benefits and dosage warnings.",
         content: `### Transforming Balconies Into Wellness Sanctuaries
 Even a 5-foot balcony with 4 hours of sunlight can yield daily health benefits.
@@ -2264,6 +2654,38 @@ Even a 5-foot balcony with 4 hours of sunlight can yield daily health benefits.
             cons: "The yellow latex beneath the green rind contains aloin, which is a laxative toxic to dogs and cats.",
             care: "Bright light, water deeply every 3 weeks in warm weather.",
             uses: "First-aid burn relief; natural skin moisturizing; air monitoring."
+          },
+          {
+            patterns: [/pothos/i, /ivy/i],
+            plant: "Golden Pothos",
+            status: "Toxic to Pets",
+            cons: "Contains calcium oxalate needle crystals causing oral swelling, vomiting, and difficulty swallowing in dogs and cats.",
+            care: "Bright indirect light to low light. Water when top 2 inches dry.",
+            uses: "Hardy air purifying indoor vine for hanging planters and trellises."
+          },
+          {
+            patterns: [/zz plant/i, /zamioculcas/i],
+            plant: "ZZ Plant",
+            status: "Mildly Toxic to Pets",
+            cons: "Contains calcium oxalates. Causes stomach upset and oral irritation if leaves are chewed.",
+            care: "Thrives in low light to bright indirect light. Water only once a month.",
+            uses: "Indestructible office and low-light focal foliage."
+          },
+          {
+            patterns: [/lavender/i],
+            plant: "Lavender",
+            status: "Safe for Humans, Caution with Pets",
+            cons: "Safe and relaxing for humans. Large amounts of foliage or essential oil can cause nausea and lethargy in cats.",
+            care: "Full sun, sandy well-draining soil, deep watering every 2 weeks.",
+            uses: "Aromatherapy, relaxation, insomnia relief, culinary tea, and bee pollinator magnet."
+          },
+          {
+            patterns: [/jade/i, /money tree/i, /crassula/i],
+            plant: "Jade Plant",
+            status: "Toxic to Dogs & Cats",
+            cons: "Contains toxic principles causing vomiting, lethargy, and slowed heart rate in pets.",
+            care: "Direct sun, water every 2-3 weeks when soil is dry.",
+            uses: "Classic long-lived prosperity succulent and easy indoor bonsai."
           }
         ];
       }
@@ -2350,7 +2772,7 @@ Even a 5-foot balcony with 4 hours of sunlight can yield daily health benefits.
       exportUserData() {
         const backup = {
           app: "FloraVault",
-          version: "2.0.0",
+          version: "2.1.0",
           exportDate: new Date().toISOString(),
           plants: JSON.parse(localStorage.getItem('flora_plants') || '[]'),
           questions: JSON.parse(localStorage.getItem('flora_questions') || '[]')
@@ -2415,6 +2837,7 @@ Even a 5-foot balcony with 4 hours of sunlight can yield daily health benefits.
 
       initElements() {
         this.navBtns = document.querySelectorAll('.nav-btn');
+        this.mobileNavBtns = document.querySelectorAll('.mobile-nav-btn');
         this.views = document.querySelectorAll('.view-section');
 
         this.plantGrid = document.getElementById('plantGrid');
@@ -2484,7 +2907,13 @@ Even a 5-foot balcony with 4 hours of sunlight can yield daily health benefits.
       }
 
       initEventListeners() {
+        // Desktop nav
         this.navBtns.forEach(btn => {
+          btn.addEventListener('click', () => this.switchView(btn.dataset.view));
+        });
+
+        // Mobile bottom nav
+        this.mobileNavBtns.forEach(btn => {
           btn.addEventListener('click', () => this.switchView(btn.dataset.view));
         });
 
@@ -2546,7 +2975,7 @@ Even a 5-foot balcony with 4 hours of sunlight can yield daily health benefits.
               this.showToast("Analysis failed: " + err.message, 'error');
             } finally {
               this.aiAnalyzeBtn.disabled = false;
-              this.aiAnalyzeBtn.textContent = "🩺 Diagnose Plant & Check Cons";
+              this.aiAnalyzeBtn.textContent = "🩺 Diagnose Plant & Health Cons";
             }
           });
         }
@@ -2647,6 +3076,7 @@ Even a 5-foot balcony with 4 hours of sunlight can yield daily health benefits.
 
       switchView(viewId) {
         this.navBtns.forEach(btn => btn.classList.toggle('active', btn.dataset.view === viewId));
+        this.mobileNavBtns.forEach(btn => btn.classList.toggle('active', btn.dataset.view === viewId));
         this.views.forEach(view => view.classList.toggle('active', view.id === viewId));
 
         if (viewId !== 'view-scanner' && this.camera && this.camera.isActive) {
@@ -2679,10 +3109,10 @@ Even a 5-foot balcony with 4 hours of sunlight can yield daily health benefits.
 
         if (filtered.length === 0) {
           this.plantGrid.innerHTML = `
-            <div style="grid-column: 1 / -1; text-align: center; padding: 3rem 1rem; color: var(--text-muted);">
-              <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">🌿</div>
+            <div style="grid-column: 1 / -1; text-align: center; padding: 2.5rem 1rem; color: var(--text-muted);">
+              <div style="font-size: 2.2rem; margin-bottom: 0.5rem;">🌿</div>
               <h3>No plants match your search</h3>
-              <p>Try searching for a different plant name or reset your filters.</p>
+              <p>Try searching for another plant name or reset your filters.</p>
             </div>
           `;
           return;
@@ -2691,7 +3121,7 @@ Even a 5-foot balcony with 4 hours of sunlight can yield daily health benefits.
         this.plantGrid.innerHTML = filtered.map(plant => `
           <div class="plant-card" data-plant-id="${plant.id}">
             <div class="card-media-wrapper">
-              <img src="${plant.image}" alt="${plant.name}" class="card-img" loading="lazy" />
+              <img src="${plant.image}" alt="${plant.name}" class="card-img" loading="lazy" decoding="async" />
               <span class="card-category-badge">${plant.category}</span>
               <span class="card-price-badge">${plant.nursery.price || '$15.00'}</span>
             </div>
@@ -2719,11 +3149,11 @@ Even a 5-foot balcony with 4 hours of sunlight can yield daily health benefits.
               <div class="card-specs">
                 <div class="spec-item" title="Sunlight Requirement">
                   <span>☀️</span>
-                  <span>${plant.care.sunlight.split('(')[0].trim().slice(0, 18)}...</span>
+                  <span>${plant.care.sunlight.split('(')[0].trim().slice(0, 16)}...</span>
                 </div>
                 <div class="spec-item" title="Watering Schedule">
                   <span>💧</span>
-                  <span>${plant.care.watering.split(';')[0].trim().slice(0, 18)}</span>
+                  <span>${plant.care.watering.split(';')[0].trim().slice(0, 16)}</span>
                 </div>
               </div>
             </div>
@@ -2746,12 +3176,12 @@ Even a 5-foot balcony with 4 hours of sunlight can yield daily health benefits.
           <div class="plant-modal-body">
             <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; margin-bottom: 1rem;">
               <div>
-                <h2 style="font-size: 1.8rem; font-weight: 800; line-height: 1.2;">${plant.name}</h2>
-                <p style="color: var(--text-muted); font-style: italic;">${plant.scientificName} • ${plant.category}</p>
+                <h2 style="font-size: 1.5rem; font-weight: 800; line-height: 1.2;">${plant.name}</h2>
+                <p style="color: var(--text-muted); font-style: italic; font-size: 0.85rem;">${plant.scientificName} • ${plant.category}</p>
               </div>
               <div style="text-align: right;">
-                <div style="font-size: 1.4rem; font-weight: 800; color: var(--primary);">${plant.nursery.price || '$15.00'}</div>
-                <span style="font-size: 0.8rem; color: var(--text-muted);">${plant.nursery.name}</span>
+                <div style="font-size: 1.3rem; font-weight: 800; color: var(--primary);">${plant.nursery.price || '$15.00'}</div>
+                <span style="font-size: 0.78rem; color: var(--text-muted);">${plant.nursery.name}</span>
               </div>
             </div>
 
@@ -2759,18 +3189,18 @@ Even a 5-foot balcony with 4 hours of sunlight can yield daily health benefits.
               <div class="toxicity-alert-box">
                 <div class="toxicity-alert-title">
                   <span>⚠️</span>
-                  <span>HEALTH CON: TOXIC & DANGEROUS TO PETS/HUMANS</span>
+                  <span>HEALTH CON: TOXIC TO PETS/HUMANS</span>
                 </div>
-                <p style="margin-bottom: 0.5rem; font-weight: 600; color: #7f1d1d;">
+                <p style="margin-bottom: 0.45rem; font-weight: 600; color: #7f1d1d; font-size: 0.88rem;">
                   Severity: ${plant.toxicity.severity} | High Risk to: ${plant.toxicity.riskGroups.join(', ')}
                 </p>
-                <p style="font-size: 0.92rem; color: #991b1b; margin-bottom: 0.5rem;">
+                <p style="font-size: 0.88rem; color: #991b1b; margin-bottom: 0.45rem;">
                   <strong>Active Toxins:</strong> ${plant.toxicity.compounds}
                 </p>
-                <p style="font-size: 0.92rem; color: #991b1b; margin-bottom: 0.5rem;">
+                <p style="font-size: 0.88rem; color: #991b1b; margin-bottom: 0.45rem;">
                   <strong>Poisoning Symptoms:</strong> ${plant.toxicity.symptoms}
                 </p>
-                <p style="font-size: 0.92rem; color: #7f1d1d; background: #fee2e2; padding: 0.5rem 0.75rem; border-radius: 6px;">
+                <p style="font-size: 0.85rem; color: #7f1d1d; background: #fee2e2; padding: 0.45rem 0.65rem; border-radius: 6px;">
                   <strong>Precautions:</strong> ${plant.toxicity.precautions}
                 </p>
               </div>
@@ -2780,54 +3210,54 @@ Even a 5-foot balcony with 4 hours of sunlight can yield daily health benefits.
                   <span>🟢</span>
                   <span>100% NON-TOXIC & PET SAFE</span>
                 </div>
-                <p style="font-size: 0.92rem; color: #166534;">
+                <p style="font-size: 0.88rem; color: #166534;">
                   ${plant.toxicity.symptoms || "Completely safe for curious dogs, cats, and small children."}
                 </p>
               </div>
             `}
 
             <div class="detail-tab-nav">
-              <button class="detail-tab-btn active" data-tab="tab-care">🌱 Care Requirements</button>
-              <button class="detail-tab-btn" data-tab="tab-uses">🌟 Uses & Benefits</button>
-              <button class="detail-tab-btn" data-tab="tab-nursery">🏡 Nursery Info</button>
+              <button class="detail-tab-btn active" data-tab="tab-care">🌱 Care</button>
+              <button class="detail-tab-btn" data-tab="tab-uses">🌟 Uses</button>
+              <button class="detail-tab-btn" data-tab="tab-nursery">🏡 Nursery</button>
             </div>
 
             <div id="tab-care" class="detail-tab-pane active">
-              <p style="color: var(--text-muted); margin-bottom: 1.25rem;">${plant.description}</p>
-              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem;">
-                <div style="background: var(--bg-subtle); padding: 1rem; border-radius: 8px;">
-                  <strong style="display: block; font-size: 0.85rem; color: var(--primary);">☀️ Sunlight</strong>
-                  <span style="font-size: 0.92rem;">${plant.care.sunlight}</span>
+              <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem;">${plant.description}</p>
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 0.75rem;">
+                <div style="background: var(--bg-subtle); padding: 0.75rem; border-radius: 8px;">
+                  <strong style="display: block; font-size: 0.8rem; color: var(--primary);">☀️ Sunlight</strong>
+                  <span style="font-size: 0.88rem;">${plant.care.sunlight}</span>
                 </div>
-                <div style="background: var(--bg-subtle); padding: 1rem; border-radius: 8px;">
-                  <strong style="display: block; font-size: 0.85rem; color: var(--primary);">💧 Watering</strong>
-                  <span style="font-size: 0.92rem;">${plant.care.watering}</span>
+                <div style="background: var(--bg-subtle); padding: 0.75rem; border-radius: 8px;">
+                  <strong style="display: block; font-size: 0.8rem; color: var(--primary);">💧 Watering</strong>
+                  <span style="font-size: 0.88rem;">${plant.care.watering}</span>
                 </div>
-                <div style="background: var(--bg-subtle); padding: 1rem; border-radius: 8px;">
-                  <strong style="display: block; font-size: 0.85rem; color: var(--primary);">🪴 Soil Mix</strong>
-                  <span style="font-size: 0.92rem;">${plant.care.soil}</span>
+                <div style="background: var(--bg-subtle); padding: 0.75rem; border-radius: 8px;">
+                  <strong style="display: block; font-size: 0.8rem; color: var(--primary);">🪴 Soil Mix</strong>
+                  <span style="font-size: 0.88rem;">${plant.care.soil}</span>
                 </div>
-                <div style="background: var(--bg-subtle); padding: 1rem; border-radius: 8px;">
-                  <strong style="display: block; font-size: 0.85rem; color: var(--primary);">🌡️ Temperature</strong>
-                  <span style="font-size: 0.92rem;">${plant.care.temperature}</span>
+                <div style="background: var(--bg-subtle); padding: 0.75rem; border-radius: 8px;">
+                  <strong style="display: block; font-size: 0.8rem; color: var(--primary);">🌡️ Temperature</strong>
+                  <span style="font-size: 0.88rem;">${plant.care.temperature}</span>
                 </div>
               </div>
             </div>
 
             <div id="tab-uses" class="detail-tab-pane">
-              <h4 style="margin-bottom: 0.75rem; font-weight: 700;">Botanical Uses & Practical Applications:</h4>
-              <ul style="padding-left: 1.25rem; display: flex; flex-direction: column; gap: 0.5rem; color: var(--text-main);">
+              <h4 style="margin-bottom: 0.65rem; font-weight: 700; font-size: 0.95rem;">Botanical Uses & Practical Applications:</h4>
+              <ul style="padding-left: 1.25rem; display: flex; flex-direction: column; gap: 0.4rem; color: var(--text-main); font-size: 0.9rem;">
                 ${plant.uses.map(use => `<li>${use}</li>`).join('')}
               </ul>
             </div>
 
             <div id="tab-nursery" class="detail-tab-pane">
-              <div style="background: var(--bg-subtle); padding: 1.25rem; border-radius: 8px; border: 1px solid var(--border-color);">
-                <h4 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem;">${plant.nursery.name}</h4>
-                <p style="font-size: 0.92rem; color: var(--text-muted); margin-bottom: 0.35rem;">📍 <strong>Location:</strong> ${plant.nursery.location}</p>
-                <p style="font-size: 0.92rem; color: var(--text-muted); margin-bottom: 0.85rem;">✉️ <strong>Direct Contact:</strong> ${plant.nursery.contact}</p>
+              <div style="background: var(--bg-subtle); padding: 1rem; border-radius: 8px; border: 1px solid var(--border-color);">
+                <h4 style="font-size: 1rem; font-weight: 700; margin-bottom: 0.4rem;">${plant.nursery.name}</h4>
+                <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 0.3rem;">📍 <strong>Location:</strong> ${plant.nursery.location}</p>
+                <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 0.75rem;">✉️ <strong>Direct Contact:</strong> ${plant.nursery.contact}</p>
                 <button class="btn btn-primary btn-sm" onclick="alert('Contacting ${plant.nursery.name} directly.')">
-                  Contact Nursery Directly
+                  Contact Nursery
                 </button>
               </div>
             </div>
@@ -2892,7 +3322,7 @@ Even a 5-foot balcony with 4 hours of sunlight can yield daily health benefits.
 
         let imageUrl = this.formPhotoPreview.src || '';
         if (!imageUrl || imageUrl.includes('placeholder') || imageUrl === window.location.href) {
-          imageUrl = "https://images.unsplash.com/photo-1545241047-6083a3684587?auto=format&fit=crop&w=800&q=80";
+          imageUrl = "https://images.unsplash.com/photo-1545241047-6083a3684587?auto=format&fit=crop&w=700&q=80";
         }
 
         const newPlant = {
@@ -2922,7 +3352,7 @@ Even a 5-foot balcony with 4 hours of sunlight can yield daily health benefits.
         this.uploadForm.reset();
         this.photoPreviewContainer.style.display = 'none';
         this.hazardFields.classList.remove('show');
-        this.showToast(`🌿 "${name}" uploaded successfully to FloraVault!`);
+        this.showToast(`🌿 "${name}" uploaded successfully!`);
         this.switchView('view-explore');
       }
 
@@ -2934,22 +3364,22 @@ Even a 5-foot balcony with 4 hours of sunlight can yield daily health benefits.
             <div class="question-header">
               <div class="question-author">Asked by <strong>${q.author}</strong> • ${q.timeAgo}</div>
               ${q.isResolved ? `
-                <span style="background: #ecfdf5; color: #059669; font-size: 0.75rem; font-weight: 700; padding: 0.2rem 0.6rem; border-radius: 9999px; border: 1px solid #a7f3d0;">✓ Resolved</span>
+                <span style="background: #ecfdf5; color: #059669; font-size: 0.72rem; font-weight: 700; padding: 0.2rem 0.55rem; border-radius: 9999px; border: 1px solid #a7f3d0;">✓ Resolved</span>
               ` : `
-                <span style="background: #fffbeb; color: #d97706; font-size: 0.75rem; font-weight: 700; padding: 0.2rem 0.6rem; border-radius: 9999px; border: 1px solid #fde68a;">Open Question</span>
+                <span style="background: #fffbeb; color: #d97706; font-size: 0.72rem; font-weight: 700; padding: 0.2rem 0.55rem; border-radius: 9999px; border: 1px solid #fde68a;">Open</span>
               `}
             </div>
 
             <h3 class="question-title">${q.title}</h3>
             <p class="question-excerpt">${q.content}</p>
 
-            <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem;">
-              <div style="display: flex; gap: 0.4rem; flex-wrap: wrap;">
-                ${q.tags.map(tag => `<span style="background: var(--bg-subtle); color: var(--text-muted); font-size: 0.75rem; padding: 0.2rem 0.5rem; border-radius: 4px;">#${tag}</span>`).join('')}
+            <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.4rem;">
+              <div style="display: flex; gap: 0.35rem; flex-wrap: wrap;">
+                ${q.tags.map(tag => `<span style="background: var(--bg-subtle); color: var(--text-muted); font-size: 0.72rem; padding: 0.15rem 0.45rem; border-radius: 4px;">#${tag}</span>`).join('')}
               </div>
-              <div style="display: flex; align-items: center; gap: 1rem; font-size: 0.85rem; color: var(--text-muted);">
-                <button class="btn btn-secondary btn-sm upvote-btn" data-q-id="${q.id}">▲ Helpful (${q.votes})</button>
-                <span>💬 ${q.answers.length} Responses</span>
+              <div style="display: flex; align-items: center; gap: 0.75rem; font-size: 0.8rem; color: var(--text-muted);">
+                <button class="btn btn-secondary btn-sm upvote-btn" data-q-id="${q.id}">▲ (${q.votes})</button>
+                <span>💬 ${q.answers.length}</span>
               </div>
             </div>
 
@@ -2958,16 +3388,16 @@ Even a 5-foot balcony with 4 hours of sunlight can yield daily health benefits.
                 <div class="answer-bubble ${ans.isAi ? 'ai-answer' : ''}">
                   <div class="answer-meta">
                     <span>${ans.author}</span>
-                    ${ans.isAi ? `<span class="ai-pill">🤖 FloraAI Doctor</span>` : ''}
+                    ${ans.isAi ? `<span class="ai-pill">🤖 FloraAI</span>` : ''}
                     ${ans.verifiedNursery ? `<span class="nursery-pill">Verified Nursery</span>` : ''}
                     <span style="color: var(--text-light); font-weight: 400;">• ${ans.timeAgo}</span>
                   </div>
-                  <div style="font-size: 0.92rem; line-height: 1.6; white-space: pre-wrap;">${ans.content}</div>
+                  <div style="font-size: 0.88rem; line-height: 1.55; white-space: pre-wrap;">${ans.content}</div>
                 </div>
               `).join('')}
 
-              <div style="display: flex; gap: 0.5rem; margin-top: 0.5rem;">
-                <input type="text" placeholder="Write a knowledgeable answer..." class="form-input reply-input" data-q-id="${q.id}" style="font-size: 0.88rem;" />
+              <div style="display: flex; gap: 0.4rem; margin-top: 0.4rem;">
+                <input type="text" placeholder="Write an answer..." class="form-input reply-input" data-q-id="${q.id}" style="font-size: 0.82rem;" />
                 <button class="btn btn-primary btn-sm submit-reply-btn" data-q-id="${q.id}">Reply</button>
               </div>
             </div>
@@ -2996,7 +3426,7 @@ Even a 5-foot balcony with 4 hours of sunlight can yield daily health benefits.
             if (targetQ) {
               targetQ.answers.push({
                 id: `ans-${Date.now()}`,
-                author: "Plant Enthusiast (You)",
+                author: "Plant Lover (You)",
                 isAi: false,
                 verifiedNursery: false,
                 timeAgo: "Just now",
@@ -3047,7 +3477,7 @@ Even a 5-foot balcony with 4 hours of sunlight can yield daily health benefits.
 
         this.askQuestionForm.reset();
         this.closeAllModals();
-        this.showToast("Question posted! FloraAI has answered in real-time.");
+        this.showToast("Question posted! FloraAI answered in real-time.");
         this.switchView('view-forum');
       }
 
@@ -3055,12 +3485,12 @@ Even a 5-foot balcony with 4 hours of sunlight can yield daily health benefits.
         if (!this.blogGrid) return;
         this.blogGrid.innerHTML = this.blogs.map(blog => `
           <div class="blog-card" data-blog-id="${blog.id}">
-            <img src="${blog.coverImage}" alt="${blog.title}" class="blog-img" loading="lazy" />
+            <img src="${blog.coverImage}" alt="${blog.title}" class="blog-img" loading="lazy" decoding="async" />
             <div class="blog-content">
               <span class="blog-tag">${blog.category} • ${blog.readTime}</span>
               <h3 class="blog-title">${blog.title}</h3>
               <p class="blog-summary">${blog.summary}</p>
-              <div style="font-size: 0.8rem; color: var(--text-light); margin-top: auto;">
+              <div style="font-size: 0.78rem; color: var(--text-light); margin-top: auto;">
                 By ${blog.author} • ${blog.date}
               </div>
             </div>
@@ -3077,16 +3507,16 @@ Even a 5-foot balcony with 4 hours of sunlight can yield daily health benefits.
         if (!blog || !this.blogModalContent) return;
 
         this.blogModalContent.innerHTML = `
-          <div style="max-height: 280px; overflow: hidden; border-radius: 12px 12px 0 0;">
-            <img src="${blog.coverImage}" alt="${blog.title}" style="width: 100%; height: 280px; object-fit: cover;" />
+          <div style="max-height: 240px; overflow: hidden; border-radius: 12px 12px 0 0;">
+            <img src="${blog.coverImage}" alt="${blog.title}" style="width: 100%; height: 240px; object-fit: cover;" />
           </div>
-          <div style="padding: 2rem;">
+          <div style="padding: 1.5rem 1rem;">
             <span class="blog-tag">${blog.category} • ${blog.readTime}</span>
-            <h1 style="font-size: 1.85rem; font-weight: 800; line-height: 1.3; margin-bottom: 0.75rem;">${blog.title}</h1>
-            <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border-color);">
+            <h1 style="font-size: 1.5rem; font-weight: 800; line-height: 1.3; margin-bottom: 0.65rem;">${blog.title}</h1>
+            <div style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 1.25rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--border-color);">
               Published by <strong>${blog.author}</strong> on ${blog.date}
             </div>
-            <div style="line-height: 1.75; font-size: 1.02rem; color: var(--text-main); white-space: pre-wrap;">
+            <div style="line-height: 1.7; font-size: 0.95rem; color: var(--text-main); white-space: pre-wrap;">
               ${blog.content.trim()}
             </div>
           </div>
@@ -3097,32 +3527,32 @@ Even a 5-foot balcony with 4 hours of sunlight can yield daily health benefits.
       renderScannerAnalysis(result) {
         if (!this.scannerAiResults) return;
         this.scannerAiResults.innerHTML = `
-          <div style="background: white; border: 1px solid var(--border-color); border-radius: 12px; padding: 1.25rem; margin-top: 1rem; box-shadow: var(--shadow-sm);">
-            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.75rem;">
-              <h3 style="font-size: 1.2rem; font-weight: 800; color: var(--text-main);">Detected: ${result.plantName}</h3>
-              <span style="background: #ecfdf5; color: #059669; font-weight: 700; font-size: 0.78rem; padding: 0.2rem 0.6rem; border-radius: 999px;">${result.confidence}</span>
+          <div style="background: white; border: 1px solid var(--border-color); border-radius: 12px; padding: 1.15rem; margin-top: 0.85rem; box-shadow: var(--shadow-sm);">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.65rem;">
+              <h3 style="font-size: 1.1rem; font-weight: 800; color: var(--text-main);">Detected: ${result.plantName}</h3>
+              <span style="background: #ecfdf5; color: #059669; font-weight: 700; font-size: 0.75rem; padding: 0.15rem 0.55rem; border-radius: 999px;">${result.confidence}</span>
             </div>
 
             ${result.isDangerous ? `
-              <div class="toxicity-alert-box" style="margin-bottom: 1rem;">
+              <div class="toxicity-alert-box" style="margin-bottom: 0.85rem;">
                 <div class="toxicity-alert-title"><span>⚠️</span><span>HEALTH CON: ${result.toxicityRating}</span></div>
-                <p style="font-size: 0.92rem; color: #991b1b;">${result.consAndRisks}</p>
+                <p style="font-size: 0.88rem; color: #991b1b;">${result.consAndRisks}</p>
               </div>
             ` : `
-              <div class="safe-alert-box" style="margin-bottom: 1rem;">
+              <div class="safe-alert-box" style="margin-bottom: 0.85rem;">
                 <div class="safe-alert-title"><span>🟢</span><span>${result.toxicityRating}</span></div>
-                <p style="font-size: 0.92rem; color: #166534;">Safe around children and pets.</p>
+                <p style="font-size: 0.88rem; color: #166534;">Safe around children and pets.</p>
               </div>
             `}
 
-            <div style="margin-bottom: 0.75rem;">
-              <strong style="color: var(--primary); font-size: 0.9rem;">💧 Growing Requirements:</strong>
-              <p style="font-size: 0.92rem; color: var(--text-muted);">${result.careAdvice}</p>
+            <div style="margin-bottom: 0.65rem;">
+              <strong style="color: var(--primary); font-size: 0.85rem;">💧 Growing Requirements:</strong>
+              <p style="font-size: 0.88rem; color: var(--text-muted);">${result.careAdvice}</p>
             </div>
 
             <div>
-              <strong style="color: var(--primary); font-size: 0.9rem;">🌿 Uses & Benefits:</strong>
-              <p style="font-size: 0.92rem; color: var(--text-muted);">${result.usesAndBenefits}</p>
+              <strong style="color: var(--primary); font-size: 0.85rem;">🌿 Uses & Benefits:</strong>
+              <p style="font-size: 0.88rem; color: var(--text-muted);">${result.usesAndBenefits}</p>
             </div>
           </div>
         `;
@@ -3158,41 +3588,41 @@ Even a 5-foot balcony with 4 hours of sunlight can yield daily health benefits.
         const modalContent = document.getElementById('privacyModalContent');
         if (modalContent) {
           modalContent.innerHTML = `
-            <div style="padding: 2rem;">
-              <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.25rem;">
-                <div style="width: 44px; height: 44px; background: #ecfdf5; border: 1px solid #a7f3d0; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.4rem;">🛡️</div>
+            <div style="padding: 1.5rem 1rem;">
+              <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
+                <div style="width: 40px; height: 40px; background: #ecfdf5; border: 1px solid #a7f3d0; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.3rem;">🛡️</div>
                 <div>
-                  <h2 style="font-size: 1.45rem; font-weight: 800;">Privacy & Zero-Tracking Center</h2>
-                  <p style="font-size: 0.85rem; color: var(--text-muted);">FloraVault Strict Isolation Guarantee</p>
+                  <h2 style="font-size: 1.3rem; font-weight: 800;">Privacy & Zero-Tracking Center</h2>
+                  <p style="font-size: 0.8rem; color: var(--text-muted);">FloraVault Strict Isolation Guarantee</p>
                 </div>
               </div>
 
-              <div style="background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 8px; padding: 1rem; margin-bottom: 1.5rem;">
-                <div style="font-weight: 700; color: #166534; margin-bottom: 0.35rem; display: flex; align-items: center; gap: 0.4rem;">
+              <div style="background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 8px; padding: 0.85rem; margin-bottom: 1.25rem;">
+                <div style="font-weight: 700; color: #166534; margin-bottom: 0.25rem; display: flex; align-items: center; gap: 0.4rem; font-size: 0.9rem;">
                   <span>✅</span> System Status: 100% Isolated & Private
                 </div>
-                <p style="font-size: 0.88rem; color: #166534;">
+                <p style="font-size: 0.82rem; color: #166534;">
                   FloraVault has verified that <strong>zero third-party trackers</strong> are loaded.
                 </p>
               </div>
 
-              <table style="width: 100%; border-collapse: collapse; font-size: 0.9rem; margin-bottom: 1.5rem;">
+              <table style="width: 100%; border-collapse: collapse; font-size: 0.85rem; margin-bottom: 1.25rem;">
                 <tr style="border-bottom: 1px solid var(--border-color);">
-                  <td style="padding: 0.6rem 0; color: var(--text-muted);">Third-Party Ad Trackers:</td>
-                  <td style="padding: 0.6rem 0; text-align: right; font-weight: 700; color: #16a34a;">0 Detected</td>
+                  <td style="padding: 0.5rem 0; color: var(--text-muted);">Third-Party Ad Trackers:</td>
+                  <td style="padding: 0.5rem 0; text-align: right; font-weight: 700; color: #16a34a;">0 Detected</td>
                 </tr>
                 <tr style="border-bottom: 1px solid var(--border-color);">
-                  <td style="padding: 0.6rem 0; color: var(--text-muted);">Camera Permission Stream:</td>
-                  <td style="padding: 0.6rem 0; text-align: right; font-weight: 700; color: var(--primary);">Local In-Memory Canvas Only</td>
+                  <td style="padding: 0.5rem 0; color: var(--text-muted);">Camera Stream:</td>
+                  <td style="padding: 0.5rem 0; text-align: right; font-weight: 700; color: var(--primary);">Local In-Memory Canvas</td>
                 </tr>
                 <tr>
-                  <td style="padding: 0.6rem 0; color: var(--text-muted);">Storage Location:</td>
-                  <td style="padding: 0.6rem 0; text-align: right; font-weight: 700;">Local Browser Storage</td>
+                  <td style="padding: 0.5rem 0; color: var(--text-muted);">Storage Location:</td>
+                  <td style="padding: 0.5rem 0; text-align: right; font-weight: 700;">Local Browser Storage</td>
                 </tr>
               </table>
 
-              <div style="display: flex; gap: 0.75rem; justify-content: flex-end;">
-                <button class="btn btn-secondary btn-sm" id="exportDataTrigger">Export Data (JSON)</button>
+              <div style="display: flex; gap: 0.65rem; justify-content: flex-end;">
+                <button class="btn btn-secondary btn-sm" id="exportDataTrigger">Export JSON</button>
                 <button class="btn btn-danger btn-sm" id="wipeDataTrigger">Purge Local Storage</button>
               </div>
             </div>
@@ -3233,9 +3663,9 @@ Even a 5-foot balcony with 4 hours of sunlight can yield daily health benefits.
         this.toastContainer.appendChild(toast);
         setTimeout(() => {
           toast.style.opacity = '0';
-          toast.style.transform = 'translateY(10px)';
+          toast.style.transform = 'translateY(12px)';
           setTimeout(() => toast.remove(), 300);
-        }, 3200);
+        }, 3000);
       }
 
       renderAll() {
